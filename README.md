@@ -28,8 +28,8 @@ Dashboard Dives
 ![alt text](doc/dashboard.png "Dashboard Dives")
 
 Manage Data Identitas User
-![alt text](doc/manage.png "Manage Data Identitas")
+![alt text](doc/manage1.png "Manage Data Identitas")
 
 Line, Bar and Pie Chart Information
-![alt text](doc/line.png "Line Chart Information")
-![alt text](doc/bar_pie.png "Pie and Bar Chart Information")
+![alt text](doc/line1.png "Line Chart Information")
+![alt text](doc/bar_pie1.png "Pie and Bar Chart Information")
