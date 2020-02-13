@@ -13,10 +13,10 @@
             $id = $hh['id'];
             $q = (int)$hh['quantity'] + 1;
             mysqli_query($conn, "update monitoring set quantity = '$q' where id = '$id'");
-            echo "SUCCESS UPDATE";
+            echo "SUCCESS UPDATE TO ".$npl;
         }else{
-            mysqli_query($conn, "insert into monitoring values ('', '$npl', '1','$tgl')");
-            echo "SUCCESS INSERT";
+            mysqli_query($conn, "insert into monitoring (nopol, quantity, tgl_scan) values ('$npl', '1','$tgl')");
+            echo "SUCCESS INSERT TO ".$npl;
         }
     }else{
         echo "key tidak diketahui";

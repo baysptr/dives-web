@@ -20,15 +20,15 @@
             echo "SUCCESS UPDATE :".$sort.": <br/>";
         }else{
             //tidak ada
-            mysqli_query($conn, "insert into monitoring values ('', '$nopol', '$quan', '$tgl')");
+            mysqli_query($conn, "insert into monitoring (nopol, quantity, tgl_scan) values ('$nopol', '$quan', '$tgl')");
             echo "SUCCESS INSERT :".$sort.": <br/>";
         }
     }
     $tgl = date("Y-m-d H:i:s");
-    mysqli_query($conn, "insert into nopol values ('', '122333444455555', 'SUPRIANTO', 'L 6125 QZ', '555554444333221', 'KEY_SECRET1', '$tgl')");
-    mysqli_query($conn, "insert into nopol values ('', '908070605040302', 'CHAYANTO', 'W 3266 DS', '555554444333221', 'KEY_SECRET2', '$tgl')");
-    mysqli_query($conn, "insert into nopol values ('', '593857462811574', 'BAGYO', 'B 145 AA', '214576896534231', 'KEY_SECRET3', '$tgl')");
-    mysqli_query($conn, "insert into nopol values ('', '236749586739058', 'SANTO', 'S 1974 WR', '234576984543675', 'KEY_SECRET4', '$tgl')");
+    mysqli_query($conn, "insert into nopol (nik, nama, nopol, nomor_stnk, key_secret, tgl_post) values ('122333444455555', 'SUPRIANTO', 'L 6125 QZ', '555554444333221', 'KEY_SECRET1', '$tgl')");
+    mysqli_query($conn, "insert into nopol (nik, nama, nopol, nomor_stnk, key_secret, tgl_post) values ('908070605040302', 'CHAYANTO', 'W 3266 DS', '555554444333221', 'KEY_SECRET2', '$tgl')");
+    mysqli_query($conn, "insert into nopol (nik, nama, nopol, nomor_stnk, key_secret, tgl_post) values ('593857462811574', 'BAGYO', 'B 145 AA', '214576896534231', 'KEY_SECRET3', '$tgl')");
+    mysqli_query($conn, "insert into nopol (nik, nama, nopol, nomor_stnk, key_secret, tgl_post) values ('236749586739058', 'SANTO', 'S 1974 WR', '234576984543675', 'KEY_SECRET4', '$tgl')");
     for($i=0;$i<20;$i++){
         $randDate = dateRange();
         $randValue = rand(5,50);
