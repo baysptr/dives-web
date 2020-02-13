@@ -8,8 +8,14 @@
     <link href="https://getbootstrap.com/docs/4.4/examples/navbar-fixed/navbar-top-fixed.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" rel="stylesheet">
     <style>
-        #container {
-            height: 420px;
+        .highcharts-pie-series .highcharts-point {
+            stroke: #EDE;
+            stroke-width: 2px;
+        }
+        .highcharts-pie-series .highcharts-data-label-connector {
+            stroke: silver;
+            stroke-dasharray: 2, 2;
+            stroke-width: 2px;
         }
 
         .highcharts-figure, .highcharts-data-table table {
@@ -90,6 +96,23 @@
 <script src="https://code.highcharts.com/modules/pattern-fill.js"></script>
 <script src="https://code.highcharts.com/themes/high-contrast-light.js"></script>
 <script>
+    function styleDash() {
+        var dashStyles = [
+            'Solid',
+            'ShortDash',
+            'ShortDot',
+            'ShortDashDot',
+            'ShortDashDotDot',
+            'Dot',
+            'Dash',
+            'LongDash',
+            'DashDot',
+            'LongDashDot',
+            'LongDashDotDot'
+        ];
+        var rnd = Math.floor(Math.random() * 12);
+        return dashStyles[rnd];
+    }
     var datas = $.getJSON("get_data.php", function (data) {
         var series = [];
         for (var i=0;i<data.length;i++){
@@ -103,6 +126,7 @@
                 drow.push([d, v]);
             }
             row['data'] = drow;
+            // row['dashStyle'] = styleDash();
             series.push(row);
         }
         // console.log(series);
@@ -126,13 +150,14 @@
                 },
                 borderRadius: 10,
                 borderWidth: 3,
-                crosshairs: [true]
+                crosshairs: [true, true]
             },
             plotOptions: {
                 series: {
                     label: {
                         connectorAllowed: false
                     },
+                    lineWidth: 4,
                 }
             },
             xAxis: {
@@ -170,16 +195,36 @@
             }
         };
     }
+    function mxArray(arr) {
+        return Math.max.apply(Math, arr.map(function(o) { return o.y; }));
+    }
+    function minArray(arr) {
+        return Math.min.apply(Math, arr.map(function(o) { return o.y; }));
+    }
     var datas = $.getJSON("data_pie.php", function (data) {
         // console.log(data);
         var series = [];
+        var seriesBar = [];
         var names = [];
+        var mxVal = mxArray(data);
+        var minVal = mxArray(data);
+        // console.log(mxArray(data));
+        // console.log(minArray(data));
         for(var i=0;i<data.length;i++){
-            var row = {name: data[i].name, color: getColorPattern(i), y: data[i].y};
+            if(mxVal === data[i].y){
+                var row = {name: data[i].name, color: getColorPattern(i), y: data[i].y, sliced: true, selected: true};
+            }else if(minVal === data[i].y){
+                var row = {name: data[i].name, color: getColorPattern(i), y: data[i].y, sliced: true, selected: true};
+            }else {
+                var row = {name: data[i].name, color: getColorPattern(i), y: data[i].y};
+            }
+            var rowBar = {name: data[i].name, color: getColorPattern(i), y: data[i].y};
+            // var row = {name: data[i].name, color: getColorPattern(i), y: data[i].y, sliced: true, selected: true};
             names.push(data[i].name);
             series.push(row);
+            seriesBar.push(rowBar);
         }
-        console.log(series);
+        // console.log(series);
         // ====================================================
         // Draw Pie CHart
         // ====================================================
@@ -223,7 +268,7 @@
                 type: 'bar'
             },
             title: {
-                text: 'Bagan Mean Nopol Teridentifikasi'
+                text: 'Bagan Kumulatif Nopol Teridentifikasi'
             },
             tooltip: {
                 valueSuffix: 'x',
@@ -256,7 +301,7 @@
             },
             series: [{
                 name: 'Intensitas',
-                data: series
+                data: seriesBar
             }]
         });
     });

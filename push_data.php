@@ -10,8 +10,9 @@
         $check = mysqli_query($conn, "select * from monitoring where nopol = '$npl' and tgl_scan = '$tgl'");
         if (mysqli_num_rows($check) > 0){
             $hh = mysqli_fetch_assoc($check);
-            $q = $hh['quantity'] + 1;
-            mysqli_query($conn, "update monitoring set tgl_scan = '$tgl', quantity = '$q' where nopol = '$npl'");
+            $id = $hh['id'];
+            $q = (int)$hh['quantity'] + 1;
+            mysqli_query($conn, "update monitoring set quantity = '$q' where id = '$id'");
             echo "SUCCESS UPDATE";
         }else{
             mysqli_query($conn, "insert into monitoring values ('', '$npl', '1','$tgl')");
