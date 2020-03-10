@@ -24,7 +24,10 @@
                 <a class="nav-link" href="#">Manage Data</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="info.php">Information</a>
+                <a class="nav-link" href="info.php">Summary</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="data.php">Data</a>
             </li>
         </ul>
     </div>
