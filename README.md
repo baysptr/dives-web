@@ -33,3 +33,7 @@ Manage Data Identitas User
 Line, Bar and Pie Chart Information
 ![alt text](doc/line1.png "Line Chart Information")
 ![alt text](doc/bar_pie1.png "Pie and Bar Chart Information")
+
+## Issue
+- [ ] POST data to HTTPS / SSL URL ***(FORSCANNER)***
+- [ ] Indicator Scanner and Client for behavior run system

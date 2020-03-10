@@ -4,10 +4,13 @@
 ESP8266WebServer server(80);
 #include <ArduinoJson.h>
 #include "FS.h"
+//#include <WiFiClientSecureBearSSL.h>
+
+//const char fingerprint[] PROGMEM= "0E 8F 01 01 FE 4F 31 0E 37 53 0B 83 04 79 F3 7F D4 BA 05 AA";
 
 String ssid_c = "";
 String pass_c = "";
-String API = "http://192.168.1.14/web_dives/push_data.php";
+String API = "http://identifikasi.inodroid-narotama.com/push_data.php";
 int configAP = 0;
 
 int LoopTime_Soll = 9;
@@ -52,7 +55,7 @@ void setup()
     server.handleClient();
   }
 
-  WiFi.begin("HOME BASE", "beknikuu");
+  WiFi.begin(ssid_c, pass_c);
   Serial.print("Connecting");
   while (WiFi.status() != WL_CONNECTED)
   {
@@ -109,7 +112,9 @@ void findPattern(String ssid){
 
 void sendReq(String key){
   if (WiFi.status() == WL_CONNECTED) { 
-    HTTPClient http;  
+//    std::unique_ptr<BearSSL::WiFiClientSecure>client(new BearSSL::WiFiClientSecure);  
+//    client->setFingerprint(fingerprint);
+    HTTPClient http;
     http.begin(API);  
     http.addHeader("Content-Type", "application/x-www-form-urlencoded");
     int httpCode = http.POST("key="+key);                                                                  //Send the request
